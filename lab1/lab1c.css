@@ -1,0 +1,28 @@
+div{
+    width: 50%;
+}
+
+.float{
+    float: right;
+}
+
+.clear{
+    clear: left;
+}
+
+h1{
+    text-align: center;
+    clear: both;
+}
+
+.leftTomato{
+    width:150px;
+    height:150px;
+    float:left;
+}
+
+.rightTomato{
+    width:100px;
+    height:100px;
+    float:right;
+}

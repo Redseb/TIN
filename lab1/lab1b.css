@@ -1,0 +1,28 @@
+/* Define font style and size for paragraphs and headers */
+p, li{
+    font-style: normal;
+    font-size: 2vw;
+}
+h1{
+    font-style: italic;
+    font-size: 4vw;
+}
+h2, h3, h4, h5, h6{
+    font-style: italic;
+    font-size: 3vw;
+}
+/* 2. Define style and color of table borders */
+table{
+    border: 2px solid darkblue;
+}
+th, td{
+    border: 1px dashed darkblue;
+}
+/* 3. Remove underlines from links */
+a{
+    text-decoration: none;
+}
+/* 4. Change the style of markers for unordered lists */
+ul{
+    list-style-type: square;
+}
