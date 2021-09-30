@@ -1,15 +1,15 @@
 /* Define font style and size for paragraphs and headers */
 p, li{
     font-style: normal;
-    font-size: 2vw;
+    font-size: 1vw;
 }
 h1{
     font-style: italic;
-    font-size: 4vw;
+    font-size: 2vw;
 }
 h2, h3, h4, h5, h6{
     font-style: italic;
-    font-size: 3vw;
+    font-size: 1.5vw;
 }
 /* 2. Define style and color of table borders */
 table{
