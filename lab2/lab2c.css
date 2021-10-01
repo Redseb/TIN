@@ -1,0 +1,36 @@
+#mainWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#content{
+    width: 80%;
+    background-color: rgb(154, 218, 168);
+}
+
+#banner{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: cursive;
+}
+
+article h3{
+    font-family: monospace;
+    font-size: 3vh;
+    text-decoration: underline;
+    margin-left: 20px;
+}
+
+article p{
+    margin-left: 30px;
+    border: 1px dashed black;
+    background-color:rgb(232, 191, 236);
+    width: 90%;
+}
+
+article a:hover{
+    color:red;
+}
