@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Lab 2</title>
+        <link rel="stylesheet" href="lab2b.css" />
+    </head>
+    <body>
+        <!--Assignment A: form contains all of the required inputs-->
+        <form id="mainContainer">
+            <div class="field">
+                <label for="username" class="required">Username*</label>
+                <input type="text" id="username" required/>
+            </div>
+            <div class="field">
+                <label for="userPassword" class="required">Password*</label>
+                <input type="password" id="userPassword" required/>
+            </div>
+
+            <div class="field">
+                <label for="gender">Male</label>
+                <input type="radio" name="gender" id="gender" value="Male"/>
+            </div>
+            <div class="field">
+                <label for="gender">Female</label>
+                <input type="radio" name="gender" id="gender" value="Female"/>
+            </div>
+            <div class="field">
+                <label for="favConsole">Favorite Console</label>
+                <select name="Consoles" id="favConsole">
+                    <option value="PS5">Playstation 5</option>
+                    <option value="XSX">Xbox Series X</option>
+                    <option value="XSS">Xbox Series S</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="extraDetails">Additional Details</label>
+                <textarea id="extraDetails">
+                    test
+                </textarea>
+            </div>
+            <div class="field">
+                <label for="promotionalMaterial">I want to receive promotional material</label>
+                <input type="checkbox" id="promotionalMaterial" />
+            </div>
+            <div class="buttonWrapper">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+
+        </form>
+    </body>
+</html>

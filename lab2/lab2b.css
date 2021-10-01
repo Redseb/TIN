@@ -1,0 +1,42 @@
+
+body{
+    background-color: rgb(83, 83, 83);
+}
+
+/* Assignment B - Define styles of font for form elements */
+
+form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: monospace;
+    font-size: 2vh;
+    color: white;
+}
+
+input, select, textarea, button{
+    width: 45%;
+}
+
+.field{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+label{
+    margin-right: 20px;
+}
+
+.buttonWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* Assignment B - Define colors for field labels, mandatory fields should have different colors from other fields */
+
+.required{
+    color: red;
+}
