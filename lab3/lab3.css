@@ -1,17 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto:wght@100&display=swap');
 .mainWrapper{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.headerWrapper{
+header{
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 20px;
+    font-family: 'Ephesis', cursive;;
 }
 
-.headerWrapper img{
+header img{
     border: 1px solid black;
     border-radius: 10px;
     transform: rotate(10deg);
@@ -19,17 +22,19 @@
 }
 
 .bodyWrapper{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 0;
 }
 
 .galleryWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    grid-column-end: span 1;
+    grid-row-start: 3;
     border: 1px dashed red;
+}
+
+.galleryWrapper figcaption{
+    font-family: 'Roboto', sans-serif;
+    
 }
 
 .galleryWrapper img{
@@ -37,19 +42,13 @@
 }
 
 .articleWrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    /* flex-grow: 0.5; */
-    width: 75%;
+    grid-row-start: 2;
+    grid-column-end: span 1;
     border: 1px dashed red;
+    font-family: 'Roboto', sans-serif;
 }
 
 .articleWrapper p{
-    min-width: 70vw;
-    max-width: 75vw;
-    /* flex: 1; */
     color: red;
 }
 
@@ -66,30 +65,56 @@
     float: right;
 }
 
-#inlineQuote1{
-    display: block;
-    margin: 10px;
+aside{
+    margin: 5px;
     font-size: 2vh;
-    float: right;
-    font-family: cursive;
-    width: 20px;
+    float: left;
+    font-family: 'Ephesis', cursive;;
+    background-color: coral;
+    max-width: 50%;
 }
 
+blockquote{
+    margin: 2px;
+}
 
+#inlineQuote1{
+    float: right;
+}
+
+#inlineQuote2{
+    float: left;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: cyan;
+    font-size: 1.5vh;
+}
 
 @media only screen and (min-width: 800px) {
     .articleWrapper p{
-        flex: 0.5;
-        min-width: 30vw;
+        grid-column-start: 2;
         color: blue;
+    }
+    .bodyWrapper{
+        grid-template-columns: 1fr 4fr;
+    }
+    .columnsWrapper{
+        column-count: auto;
+        column-gap: 40px;
+        column-width: 300px;
+    }
+    .galleryWrapper{
+        grid-column-end: span 1;
+        grid-row-start: 2;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .articleWrapper p{
-        flex: 1;
-        min-width: 20vw;
-        max-width: 25vw;
         color: black;
     }
 }
