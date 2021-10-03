@@ -1,15 +1,11 @@
 //NOTE: Unsure if this is exactly what the task is asking
-//Prototype is accessed through class, not initializer?
-//Trying to access prototype of an anonymous object does not work
-class Student {
-  constructor(firstName, lastName, id, grades) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.id = id;
-    this.grades = grades;
-  }
-}
-Student.prototype.requiredClasses = ["CS", "English", "Maths"]; //Classes each student should take
+const Student = {
+  firstName: "firstName",
+  lastName: "lastName",
+  id: 0,
+  grades: [0, 0, 0],
+  requiredClasses: ["CS", "English", "Maths"],
+};
 
 const studentFactory = (n) => {
   //Create n students
@@ -26,9 +22,12 @@ const studentFactory = (n) => {
       Math.floor(Math.random() * 6),
       Math.floor(Math.random() * 6),
     ];
-    students.push(
-      new Student(randomFirstName, randomLastName, i, randomGrades)
-    );
+    const student = Object.create(Student);
+    student.firstName = randomFirstName;
+    student.lastName = randomLastName;
+    student.id = i;
+    student.grades = randomGrades;
+    students.push(student);
   }
   return students;
 };
