@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Lab 6 Task C</title>
+        <link rel="stylesheet" href="6c.css"/>
+    </head>
+    <body>
+        <form>
+            <div class="inputContainer">
+                <h1>Not suspicious form at all</h1>
+            </div>
+            <div class="inputContainer">
+                <label for="fname" id="fnameLabel">Full name:</label> <!--Full name should not include numbers or special characters-->
+                <input type="text" id="fnameInput" name="fname">
+            </div>
+
+            <div class="inputContainer">
+                <label for="age" id="ageLabel">Age:</label>
+                <input type="number" id="ageInput" name="age"> <!--In order for this field to be mandatory I would add the "required" parameter, but I will check it with JS instead-->
+            </div>
+
+            <button id="validateButton" type="button">Validate</button>
+        </form>
+        <script src="6c.js"></script>
+    </body>
+</html>
+
