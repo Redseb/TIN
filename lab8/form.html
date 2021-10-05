@@ -5,13 +5,13 @@
 </head>
 
 <body>
-    <form method="POST" action="">
-        <p>First Name</p>
-        <input type="text" id="fnameInput" />
-        <p>Last Name</p>
-        <input type="text" id="lnameInput" />
-        <p>Age</p>
-        <input type="number" id="ageInput" />
+    <form method="POST" action="/formdata">
+        <label for="fname" >First Name</label>
+        <input name="fname" type="text" id="fname" />
+        <label for="lname">Last Name</label>
+        <input name="lname" type="text" id="lname" />
+        <label for="age">Age</label>
+        <input name="age" type="number" id="age" />
         <button type="submit">Submit</button>
     </form>
 </body>
