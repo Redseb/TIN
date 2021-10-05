@@ -1,0 +1,41 @@
+body{
+    background-color: rgb(194, 194, 194);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input{
+    width: 50vw;
+    margin-left: 50px;
+}
+
+button{
+    height: 10vh;
+    width: 80vw;
+    margin-left: 10vw;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+th,td{
+    border: 1px solid black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3vh;
+}
