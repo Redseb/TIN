@@ -1,0 +1,26 @@
+body{
+    background-color: rgb(231, 231, 231);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 80vh;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+input{
+    margin-left: 20px;
+}
+
+button{
+    font-family: 'Courier New', Courier, monospace;
+    height: 10vh; 
+}

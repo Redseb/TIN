@@ -1,9 +1,14 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 5500;
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(
   express.urlencoded({
@@ -13,9 +18,14 @@ app.use(
 
 app.use(bodyParser.json());
 
-app.post("/jsondata", (req, res) => {
-  const a = req.body.a;
-  const b = req.body.b;
+app.post("/arithmetic", (req, res) => {
+  const HEADERS = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const a = parseInt(req.body.a);
+  const b = parseInt(req.body.b);
   const op = req.body.op;
   let result;
   switch (op) {
@@ -39,7 +49,7 @@ app.post("/jsondata", (req, res) => {
     result = "Invalid parameters a or b";
     res.statusCode = 400;
   }
-  res.send({ result: result });
+  res.send({ headers: HEADERS, result: result });
 });
 
 app.listen(port, () => {
