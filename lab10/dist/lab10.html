@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Lab 10</title>
+        <link rel="stylesheet" href="lab10.css"/>
+    </head>
+    <body>
+        <div class="inputContainer">
+            <label for="celsiusInput">Celsius</label>
+            <input type="text" id="celsiusInput" name="celsiusInput"/>
+        </div>
+        <div class="inputContainer">
+            <label for="fahrenheitInput">Fahrenheit</label>
+            <input type="text" id="fahrenheitInput" name="fahrenheitInput"/>
+        </div>
+        <div class="inputContainer">
+            <label for="kelvinInput">Kelvin</label>
+            <input type="text" id="kelvinInput" name="kelvinInput"/>
+        </div>
+        <br>
+        <div class="inputContainer">
+            <label for="kilometerInput">Kilometers</label>
+            <input type="text" id="kilometerInput" name="kilometerInput"/>
+        </div>
+        <div class="inputContainer">
+            <label for="mileInput">Miles</label>
+            <input type="text" id="mileInput" name="mileInput"/>
+        </div>
+        <script src="./dist/bundle.js"></script>
+        <script >
+            const celsiusInput = document.getElementById("celsiusInput");
+const fahrenheitInput = document.getElementById("fahrenheitInput");
+const kelvinInput = document.getElementById("kelvinInput");
+const kilometerInput = document.getElementById("kilometerInput");
+const mileInput = document.getElementById("mileInput");
+
+// const [
+//   celsiusToFahrenheit,
+//   celsiusToKelvin,
+//   fahrenheitToCelsius,
+//   fahrenheitToKelvin,
+//   kelvinToCelsius,
+//   kelvinToFahrenheit,
+//   kilometersToMiles,
+//   milesToKilometers,
+// ] = require("./modules");
+
+const tempConvert = (init_scale, value) => {
+  if (init_scale !== "C" || "F" || "K") {
+    return -1;
+  }
+  console.log(celsiusToKelvin(value));
+  if (init_scale == "C") {
+    fahrenheitInput.value = celsiusToFahrenheit(value);
+    kelvinInput.value = celsiusToKelvin(value);
+  }
+};
+console.log("test");
+
+celsiusInput.addEventListener("change", (e) => {
+  console.log("test");
+  tempConvert("C", e.target.value);
+});
+
+        </script>
+
+    </body>
+</html>
