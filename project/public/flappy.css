@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    font-family: 'VT323', monospace;
+    color: white;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: gray;
+    background-color: black;
+}
+
+button{
+    display: flex;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    height: 9vh;
+    width: 25vw;
+    background-color: black;
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 7vh;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+#bottomContainer{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    border-bottom: 5px dashed white;
+}
+
+h3{
+    margin-top: 8px;
+    font-size: 7vh;
+    font-weight: normal;
+}
+
+#usernameInput{
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    font-size: 7vh;
+    margin-top: 8px;
+}
+
+input:focus, input:active{
+    outline: none;
+}
