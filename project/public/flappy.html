@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Flappy Bird</title>
+        <title>Retro Bird</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
@@ -20,6 +20,8 @@
                     Highscores
                 </a>
             </button>
+            <h3 id="musicButton">Music</h3>
+            <h3 id="sfxButton">SFX</h3>
             <div>
                 <h4>Themes</h4>
                 <p id="ogTheme" class="themeButton activeTheme">Original</p>
@@ -29,6 +31,12 @@
             <script>
                 let theme = "og"; //og, gb, vb
                 const SERVER_BASE_URL = "http://localhost:3000"
+                const MUSIC_FILE = "retroBirdBGM.wav";
+                const FLAP_SFX_FILE = "flap.wav";
+                const DAMAGE_SFX_FILE = "damage.wav";
+                let flap_sfx;
+                let damage_sfx;
+                let isSfxMuted = false;
                 //Game variables
                 const GAME_SCREEN_HEIGHT = window.innerHeight-window.innerHeight/10;
                 const GAME_SCREEN_WIDTH = window.innerWidth;
@@ -59,6 +67,7 @@
                 let pipe3_y = GAME_SCREEN_HEIGHT/7;
                 const MIN_PIPE_GAP = PLAYER_HEIGHT*3;
                 let pipe_color = [255,255,255];
+
                 function setup() {
                     createCanvas(windowWidth,GAME_SCREEN_HEIGHT);
                     background(0);
@@ -67,8 +76,24 @@
                     // playButton.position(width/2, height/2);
                     const playButton = select('#playButton');
                     const usernameInput = select('#usernameInput');
+                    const sfxButton = select('#sfxButton');
+
                     username = usernameInput.value();
                     playButton.mousePressed(resetGame);
+                    flap_sfx=loadSound(FLAP_SFX_FILE);
+                    damage_sfx=loadSound(DAMAGE_SFX_FILE);
+                    sfxButton.mousePressed(()=>{
+                        if(isSfxMuted){
+                            isSfxMuted = false;
+                            flap_sfx.setVolume(1);
+                            damage_sfx.setVolume(1);
+                        } else {
+                            isSfxMuted = true;
+                            flap_sfx.setVolume(0);
+                            damage_sfx.setVolume(0);
+                        }
+                    });
+
                 }
                 function resetGame() {
                     const usernameInput = select('#usernameInput');
@@ -139,6 +164,7 @@
                     if(player_y >= height-PLAYER_HEIGHT){
                         player_y = height-PLAYER_HEIGHT;
                         player_velocity=0;
+                        damage_sfx.play();
                         gameState = -1;
                     } else if(player_y < 0-PLAYER_HEIGHT){ //stops player from flying too high
                         player_y = 0-PLAYER_HEIGHT;
@@ -155,30 +181,32 @@
                 function movePipe(){
                     // if(hasCollidedWithPipe(pipe1_x, 0, pipe1_y)){
                     if(hasCollidedWithPipe(pipe1_x, pipe1_y, pipe1_y+MIN_PIPE_GAP) || hasCollidedWithPipe(pipe2_x, pipe2_y, pipe2_y+MIN_PIPE_GAP) || hasCollidedWithPipe(pipe3_x, pipe3_y, pipe3_y+MIN_PIPE_GAP)){
-                            console.log("collided");
-                            gameState = -1;
-                        }
-                        pipe1_x-=PIPE_SPEED;
-                        pipe2_x-=PIPE_SPEED;
-                        pipe3_x-=PIPE_SPEED;
-                        if(pipe1_x < 0 - PIPE_WIDTH){
-                            console.log("respawn")
-                            pipe1_x = GAME_SCREEN_WIDTH;
-                            pipe1_y = random(height / 7, 3/4*height)
-                            currScore+=1;
-                        }
-                        if(pipe2_x < 0 - PIPE_WIDTH){
-                            console.log("respawn")
-                            pipe2_x = GAME_SCREEN_WIDTH;
-                            pipe2_y = random(height / 7, 3/4*height)
-                            currScore+=1;
-                        }
-                        if(pipe3_x < 0 - PIPE_WIDTH){
-                            console.log("respawn")
-                            pipe3_x = GAME_SCREEN_WIDTH;
-                            pipe3_y = random(height / 7, 3/4*height)
-                            currScore+=1;
-                        }
+                        damage_sfx.play();
+                            
+                        console.log("collided");
+                        gameState = -1;
+                    }
+                    pipe1_x-=PIPE_SPEED;
+                    pipe2_x-=PIPE_SPEED;
+                    pipe3_x-=PIPE_SPEED;
+                    if(pipe1_x < 0 - PIPE_WIDTH){
+                        console.log("respawn")
+                        pipe1_x = GAME_SCREEN_WIDTH;
+                        pipe1_y = random(height / 7, 3/4*height)
+                        currScore+=1;
+                    }
+                    if(pipe2_x < 0 - PIPE_WIDTH){
+                        console.log("respawn")
+                        pipe2_x = GAME_SCREEN_WIDTH;
+                        pipe2_y = random(height / 7, 3/4*height)
+                        currScore+=1;
+                    }
+                    if(pipe3_x < 0 - PIPE_WIDTH){
+                        console.log("respawn")
+                        pipe3_x = GAME_SCREEN_WIDTH;
+                        pipe3_y = random(height / 7, 3/4*height)
+                        currScore+=1;
+                    }
                 }
                 function drawPipe(){
                     fill(color(pipe_color));
@@ -205,6 +233,9 @@
                 function keyPressed() {
                     if(key == ' '){
                         player_velocity += PLAYER_JUMP_HEIGHT;
+                        if(!flap_sfx.isPlaying()){
+                            flap_sfx.play();
+                        }
                         if(gameState == 0 || gameState == -1){
                             resetGame();
                         }
@@ -261,6 +292,21 @@
                 ogThemeButton.addEventListener('click', ()=>{changeTheme("og")});
                 gbThemeButton.addEventListener('click', ()=>{changeTheme("gb")});
                 vbThemeButton.addEventListener('click', ()=>{changeTheme("vb")});
+
+                musicButton = document.getElementById("musicButton");
+
+                let bgm = new Audio(MUSIC_FILE);
+                bgm.loop = true;
+                bgm.play();
+                musicButton.addEventListener('click', ()=>{
+                    if(bgm.paused){
+                        bgm.play();
+                    } else {
+                        bgm.pause();
+                    }
+                })
+
+
 
                 </script>
 

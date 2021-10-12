@@ -15,7 +15,6 @@ body{
 button{
     display: flex;
     border: none;
-    padding: 1rem 2rem;
     margin: 0;
     text-decoration: none;
     height: 9vh;
@@ -27,6 +26,7 @@ button{
     align-items: center;
     justify-content: center;
     outline: none;
+    width: 15vw;
 }
 
 button:hover{
@@ -36,7 +36,7 @@ button:hover{
 #bottomContainer{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 h3{
@@ -52,6 +52,7 @@ h3{
     border: none;
     font-size: 7vh;
     margin-top: 8px;
+    width: 20vw;
 }
 
 input:focus, input:active{
@@ -94,6 +95,10 @@ h4{
     font-weight: normal;
 }
 
+p{
+    font-size: 2vh;
+}
+
 .themeButton:hover{
     cursor: pointer;
 }
@@ -128,4 +133,15 @@ h4{
 
 #bottomContainer.vb{
     border-bottom: 5px dashed #ef0000;
+}
+
+#musicButton, #sfxButton{
+    margin-right: 50px;
+}
+#musicButton{
+    margin-left: 50px;
+}
+
+#musicButton:hover, #sfxButton:hover{
+    cursor: pointer;
 }
