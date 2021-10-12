@@ -39,12 +39,16 @@ app.get("/highscore", (req, res) => {
     })
     .on("end", () => {
       let scores_formatted = "";
+
       highscores.sort((a, b) => {
         if (parseInt(a.Highscore) < parseInt(b.Highscore)) return 1;
         if (parseInt(a.Highscore) > parseInt(b.Highscore)) return -1;
         return 0;
       });
-      console.log(highscores);
+      highscores = highscores.filter(
+        //es6 filtering magic
+        (v, i, a) => a.findIndex((t) => t.Username === v.Username) === i
+      );
       highscores.forEach((highscore) => {
         scores_formatted += `<tr><td>${highscore.Username}</td><td>${highscore.Highscore}</td></tr>`;
       });
@@ -59,6 +63,7 @@ app.get("/highscore", (req, res) => {
                 <link rel="stylesheet" href="flappy.css" />
             </head>
             <body>
+            <a id="backButton" href="http://localhost:3000/">Back</a>
                 <h1>Highscores</h1>
                 <table>
                     <tr>
@@ -75,7 +80,6 @@ app.get("/highscore", (req, res) => {
 
 //Add new highscore
 app.post("/highscore", (req, res) => {
-  console.log(req.body.username, req.body.highscore);
   csvWriter
     .writeRecords([
       {

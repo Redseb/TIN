@@ -37,7 +37,6 @@ button:hover{
     display: flex;
     flex-direction: row;
     /* justify-content: center; */
-    border-bottom: 5px dashed white;
 }
 
 h3{
@@ -74,4 +73,59 @@ h1{
     font-size: 15vh;
     text-align: center;
     font-weight: normal;
+}
+
+#backButton{
+    font-size: 6vh;
+    margin-left: 5vw;
+    margin-top: 1vh;
+}
+
+a{
+    text-decoration: none;
+}
+
+button:hover, a:hover, h3:hover{
+    color:lightyellow;
+}
+
+h4{
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+.themeButton:hover{
+    cursor: pointer;
+}
+
+.activeTheme{
+    font-weight: bold;
+}
+
+.og, .og #usernameInput, .og h3, .og Button, .og a, .og p, .og h4{
+    background-color: black;
+    color: rgb(200,200,200);
+}
+
+.gb, .gb #usernameInput, .gb h3, .gb Button, .gb a, .gb p, .gb h4{
+    background-color: rgb(155,188,15);
+    color: rgb(48,98,48);
+
+}
+
+.vb, .vb #usernameInput, .vb h3, .vb Button, .vb a, .vb p, .vb h4{
+    background-color: #a40000;
+    color: #ef0000;
+}
+
+#bottomContainer.og{
+    border-bottom: 5px dashed rgb(200,200,200);
+}
+
+#bottomContainer.gb{
+    border-bottom: 5px dashed rgb(48,98,48);
+}
+
+#bottomContainer.vb{
+    border-bottom: 5px dashed #ef0000;
 }

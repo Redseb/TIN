@@ -11,7 +11,23 @@
 
     </head>
     <body>
+        <div id="bottomContainer" class="og">
+            <button id="playButton">Play</button>
+            <h3>Username: </h3>
+            <input type="text" id="usernameInput" />
+            <button id="hsButton">
+                <a href="http://localhost:3000/highscore">
+                    Highscores
+                </a>
+            </button>
+            <div>
+                <h4>Themes</h4>
+                <p id="ogTheme" class="themeButton activeTheme">Original</p>
+                <p id="gbTheme" class="themeButton">Gameboy</p>
+                <p id="vbTheme" class="themeButton">Virtual Boy</p>
+            </div>
             <script>
+                let theme = "og"; //og, gb, vb
                 const SERVER_BASE_URL = "http://localhost:3000"
                 //Game variables
                 const GAME_SCREEN_HEIGHT = window.innerHeight-window.innerHeight/10;
@@ -20,6 +36,8 @@
                 let currScore = 0;
                 let highscore = 0;
                 let username = "";
+                let background_color = [0,0,0];
+                let text_color=[200,200,200];
                 //Player variables
                 const PLAYER_HEIGHT = GAME_SCREEN_WIDTH/25;
                 const PLAYER_WIDTH = GAME_SCREEN_WIDTH/25;
@@ -28,7 +46,7 @@
                 const PLAYER_JUMP_HEIGHT = GAME_SCREEN_HEIGHT/100*-1;
                 let player_velocity = 0;
                 const GRAVITY = 0.2;
-                const PLAYER_COLOR = [255,255,255];
+                let player_color = [255,255,255];
                 //Pipe variables
                 const PIPE_HEIGHT = GAME_SCREEN_HEIGHT /3;
                 const PIPE_WIDTH = GAME_SCREEN_WIDTH/8;
@@ -40,8 +58,7 @@
                 let pipe3_x = GAME_SCREEN_WIDTH * 3
                 let pipe3_y = GAME_SCREEN_HEIGHT/7;
                 const MIN_PIPE_GAP = PLAYER_HEIGHT*3;
-                const PIPE_COLOR = [255,255,255];
-                const PIPE_OUTLINE_COLOR = [150,150,150]
+                let pipe_color = [255,255,255];
                 function setup() {
                     createCanvas(windowWidth,GAME_SCREEN_HEIGHT);
                     background(0);
@@ -69,7 +86,8 @@
                     gameState=1;
                 }
                 function draw() {  //noprotect
-                    background(0);
+                    noStroke();
+                    background(color(background_color));
                     if(gameState == -1){
                         drawGameOverScreen();
                     } else if(gameState == 1){
@@ -83,10 +101,10 @@
                     }
                 }
                 function drawTitleScreen(){
-                    background(0);
+                    background(color(background_color));
                     textSize(height/8);
                     textFont('VT323');
-                    fill(255)
+                    fill(color(text_color))
                     textAlign(CENTER);
                     text("Retro Bird", width/2, height/8)
                     text("Press Space to FLAP!", width/2, height/2)
@@ -94,11 +112,20 @@
                 function drawGameOverScreen(){
                     if(currScore > highscore){
                         highscore = currScore;
+                        if(username.length > 0){
+                            fetch(`${SERVER_BASE_URL}/highscore`, {
+                            method: "POST",
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body:JSON.stringify({username: username, highscore: highscore})
+                        }).then(res => console.log(res));
+                        }
                     }
-                    background(0);
+                    background(color(background_color));
                     textSize(height/8);
                     textFont('VT323');
-                    fill(255)
+                    fill(color(text_color))
                     textAlign(CENTER);
                     text("Retro Bird", width/2, height/8);
                     text(`Highscore: ${highscore}`, width/2, height/8 * 4);
@@ -122,7 +149,7 @@
                     }
                 }
                 function drawPlayer(){
-                    fill(color(PLAYER_COLOR));
+                    fill(color(player_color));
                     rect(player_x, player_y, PLAYER_WIDTH, PLAYER_HEIGHT);
                 }
                 function movePipe(){
@@ -154,8 +181,7 @@
                         }
                 }
                 function drawPipe(){
-                    fill(color(PIPE_COLOR));
-                    stroke(color(PIPE_OUTLINE_COLOR));
+                    fill(color(pipe_color));
                     rect(pipe1_x, 0, PIPE_WIDTH, pipe1_y);
                     rect(pipe1_x, pipe1_y+MIN_PIPE_GAP, PIPE_WIDTH, height);
                     rect(pipe2_x, 0, PIPE_WIDTH, pipe2_y);
@@ -173,7 +199,7 @@
                 function drawScore(){
                     textSize(height/8);
                     textFont('VT323');
-                    fill(255)
+                    fill(color(text_color))
                     text(currScore, width/2, height/8)
                 }
                 function keyPressed() {
@@ -184,16 +210,61 @@
                         }
                     }
                 }
+                ogThemeButton = document.getElementById("ogTheme");
+                gbThemeButton = document.getElementById("gbTheme");
+                vbThemeButton = document.getElementById("vbTheme");
+                bottomContainer = document.getElementById("bottomContainer");
+                
+                function changeTheme(newTheme){
+                    switch(newTheme){
+                        case 'og':
+                            ogThemeButton.classList.add("activeTheme")
+                            gbThemeButton.classList.remove("activeTheme");
+                            vbThemeButton.classList.remove("activeTheme");
+                            bottomContainer.classList.add("og");
+                            bottomContainer.classList.remove("gb");
+                            bottomContainer.classList.remove("vb");
+                            background_color=[0,0,0];
+                            player_color=[255,255,255];
+                            pipe_color=[255,255,255];
+                            text_color=[200,200,200];
+                            break;
+                        case 'gb':
+                            ogThemeButton.classList.remove("activeTheme")
+                            gbThemeButton.classList.add("activeTheme");
+                            vbThemeButton.classList.remove("activeTheme");
+                            bottomContainer.classList.remove("og");
+                            bottomContainer.classList.add("gb");
+                            bottomContainer.classList.remove("vb");
+                            background_color=[155,188,15];
+                            player_color=[48,98,48];
+                            pipe_color=[15,56,15];
+                            text_color=[48,98,48];
+                            break;
+                        case 'vb':
+                            bottomContainer.classList.remove("og");
+                            bottomContainer.classList.remove("gb");
+                            bottomContainer.classList.add("vb");
+                            ogThemeButton.classList.remove("activeTheme")
+                            gbThemeButton.classList.remove("activeTheme");
+                            vbThemeButton.classList.add("activeTheme");
+                            background_color="#a40000";
+                            player_color="#ef0000";
+                            pipe_color="#550000";
+                            text_color="#ef0000";
+                            break;
+
+                    }
+                }
+
+
+                ogThemeButton.addEventListener('click', ()=>{changeTheme("og")});
+                gbThemeButton.addEventListener('click', ()=>{changeTheme("gb")});
+                vbThemeButton.addEventListener('click', ()=>{changeTheme("vb")});
+
                 </script>
-                <div id="bottomContainer">
-                    <button id="playButton">Play</button>
-                    <h3>Username: </h3>
-                    <input type="text" id="usernameInput" />
-                    <button id="hsButton">
-                        <a href="http://localhost:3000/highscore">
-                            Highscores
-                        </a>
-                    </button>
+
+
                 </div>
     </body>
 </html>
