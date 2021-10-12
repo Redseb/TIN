@@ -12,6 +12,7 @@
     </head>
     <body>
             <script>
+                const SERVER_BASE_URL = "http://localhost:3000"
                 //Game variables
                 const GAME_SCREEN_HEIGHT = window.innerHeight-window.innerHeight/10;
                 const GAME_SCREEN_WIDTH = window.innerWidth;
@@ -183,13 +184,16 @@
                         }
                     }
                 }
-    
                 </script>
                 <div id="bottomContainer">
                     <button id="playButton">Play</button>
                     <h3>Username: </h3>
                     <input type="text" id="usernameInput" />
-                    <button id="hsButton">Highscores</button>
+                    <button id="hsButton">
+                        <a href="http://localhost:3000/highscore">
+                            Highscores
+                        </a>
+                    </button>
                 </div>
     </body>
 </html>

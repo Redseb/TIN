@@ -58,3 +58,20 @@ h3{
 input:focus, input:active{
     outline: none;
 }
+
+table{
+    border: 5px solid white;
+    font-size: 8vh;
+    text-align: center;
+    margin: 5vw;
+}
+th{
+    border-bottom: 5px dashed white;
+    font-weight: normal;
+
+}
+h1{
+    font-size: 15vh;
+    text-align: center;
+    font-weight: normal;
+}
